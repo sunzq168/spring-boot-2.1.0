@@ -1,0 +1,26 @@
+server:
+  port:8080
+spring:
+  datasource:
+    ### MySQL 连接信息
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    password: root
+    username: root
+    ### 数据源类别
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      initial-size: 5
+      min-idle: 5
+      time-between-eviction-runs-millis: 60000
+      max-wait-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 1 from DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      ###打开 PSCache，并且指定每个连接上 PSCache 的大小
+      pool-prepared-statements: true
+
+
+
