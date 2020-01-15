@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.RollbackException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +34,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    //@Transactional(rollbackFor=RuntimeException.class, propagation = Propagation.REQUIRED)
     public User save(User user) {
-        return userRepository.save(user);
+        //this.deleteById(1);
+        User saveUser = userRepository.save(user);
+        int a = 2/0;
+
+        return saveUser;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
     }

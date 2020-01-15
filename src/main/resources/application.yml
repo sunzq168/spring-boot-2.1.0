@@ -21,6 +21,12 @@ spring:
       test-on-return: false
       ###打开 PSCache，并且指定每个连接上 PSCache 的大小
       pool-prepared-statements: true
+  thymeleaf:
+    mode: HTML5
+    cache: false
+    prefix: classpath:/templates/
+    encoding: UTF-8
+
 
 
 

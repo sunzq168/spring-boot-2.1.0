@@ -2,8 +2,18 @@ package com.sun.zq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebServlet;
+
+/**
+ * @ServletComponentScan:使用该注解后， Serviet、 Filter、 Listener可以直接通 过@WebServlet、 @WebFilter、@WebListener注解 自动注册，无须其他代码
+ */
 @SpringBootApplication
+@EnableTransactionManagement
+@ServletComponentScan
 public class Application {
 
 	public static void main(String[] args) {

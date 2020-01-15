@@ -1,11 +1,10 @@
 package com.sun.zq.model;
 
+import com.alibaba.druid.sql.ast.AutoIncrementType;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @ToString
@@ -13,6 +12,7 @@ import javax.persistence.Table;
 @Table(name = "User")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String email;

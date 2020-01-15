@@ -1,6 +1,7 @@
 package com.sun.zq;
 
 import com.sun.zq.model.User;
+import com.sun.zq.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ApplicationTests {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+	private UserService userService;
 
 	@Test
 	public void contextLoads() {
@@ -49,6 +53,17 @@ public class ApplicationTests {
 		list.forEach(user -> {
 			System.out.println(user);
 		});
+	}
+
+
+	@Test
+	public void saveTest() {
+		User user = new User();
+		user.setAge(18);
+		user.setName("zhangsan");
+		user.setEmail("zhangsan@qq.com");
+
+		userService.save(user);
 	}
 
 }
