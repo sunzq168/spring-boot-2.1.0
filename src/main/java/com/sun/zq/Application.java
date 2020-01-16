@@ -3,6 +3,7 @@ package com.sun.zq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.servlet.annotation.WebFilter;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan
+@ImportResource(locations = "classpath:spring-mvc.xml")
 public class Application {
 
 	public static void main(String[] args) {
