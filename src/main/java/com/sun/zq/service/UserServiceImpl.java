@@ -6,11 +6,12 @@ import com.sun.zq.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
-import javax.persistence.RollbackException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public User findById(Integer id) {
         Optional<User> user = userRepository.findById(id);
@@ -30,11 +34,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        List<User> userList = (List<User>) redisTemplate.opsForList().range("userList", 0L, -1L);
+        if (!CollectionUtils.isEmpty(userList)) {
+            return userList;
+        }
+        userList = userRepository.findAll();
+        redisTemplate.opsForList().leftPushAll("userList", userList);
+        return userList;
     }
 
     @Override
-    //@Transactional(rollbackFor=RuntimeException.class, propagation = Propagation.REQUIRED)
+    @Transactional(rollbackFor=RuntimeException.class, propagation = Propagation.REQUIRED)
     public User save(User user) {
         //this.deleteById(1);
         User saveUser = userRepository.save(user);

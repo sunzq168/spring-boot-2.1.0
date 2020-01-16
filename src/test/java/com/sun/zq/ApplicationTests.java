@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +25,12 @@ public class ApplicationTests {
 
     @Autowired
 	private UserService userService;
+
+    @Autowired
+	private RedisTemplate redisTemplate;
+    @Autowired
+	private StringRedisTemplate stringRedisTemplate;
+
 
 	@Test
 	public void contextLoads() {
@@ -65,5 +73,17 @@ public class ApplicationTests {
 
 		userService.save(user);
 	}
+
+	@Test
+	public void redisTest() {
+		//redisTemplate.opsForValue().set("sun", "test");
+		String val = (String)redisTemplate.opsForValue().get("name");
+		System.out.println(val);
+
+		val = stringRedisTemplate.opsForValue().get("name");
+		System.out.println(val);
+	}
+
+
 
 }

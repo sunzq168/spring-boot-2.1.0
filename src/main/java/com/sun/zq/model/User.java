@@ -1,16 +1,16 @@
 package com.sun.zq.model;
 
-import com.alibaba.druid.sql.ast.AutoIncrementType;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @ToString
 @Entity
 @Table(name = "User")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
