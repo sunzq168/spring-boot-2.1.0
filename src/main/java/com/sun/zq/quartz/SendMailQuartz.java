@@ -20,8 +20,8 @@ public class SendMailQuartz {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SendMailService sendMailService;
+    //@Autowired
+    //private SendMailService sendMailService;
 
     @Scheduled(cron = "*/5 * * * * *")
     public void reportCurrentByCron() {

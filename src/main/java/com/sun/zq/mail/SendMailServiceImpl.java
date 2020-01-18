@@ -15,9 +15,9 @@ import javax.mail.internet.MimeMessage;
 import java.util.List;
 
 @Slf4j
-@Service
+//@Service
 public class SendMailServiceImpl implements SendMailService {
-    @Autowired
+    //@Autowired
     private JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
