@@ -1,9 +1,10 @@
-package com.sun.zq.service;
+package com.sun.zq.service.impl;
 
 
 import com.sun.zq.dao.UserRepository;
 import com.sun.zq.exception.AppBizException;
 import com.sun.zq.model.User;
+import com.sun.zq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

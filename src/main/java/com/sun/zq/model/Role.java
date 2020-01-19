@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * @author sunzheng
@@ -12,15 +11,10 @@ import java.io.Serializable;
 @Data
 @ToString
 @Entity
-@Table(name = "User")
-public class User implements Serializable {
-    //private static final long serialVersionUID = 3777394554721084437L;
-
+@Table(name = "Role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String email;
-    private Integer age;
-    //private String password;
 }

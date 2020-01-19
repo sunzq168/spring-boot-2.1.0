@@ -49,8 +49,5 @@ spring:
       trust-all: true
 
 
-
-
-
 logging:
   config: classpath:log4j.xml
