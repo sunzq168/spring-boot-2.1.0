@@ -2,16 +2,20 @@ package com.sun.zq.service;
 
 
 import com.sun.zq.dao.UserRepository;
+import com.sun.zq.exception.AppBizException;
 import com.sun.zq.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
     public User findByName(String name) {
         return userRepository.findByName(name);
     }
@@ -77,5 +82,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByIn(List<Integer> idList) {
         return userRepository.findByIdIn(idList);
+    }
+
+    @Retryable(value = {AppBizException.class}, maxAttempts = 8,backoff = @Backoff(delay = 2000, multiplier = 2))
+    @Override
+    public List<User> findByIdIn(List<Integer> idList) {
+        System.out.println("findByIdIn 重试失败了！" + new Date());
+        throw new AppBizException();
     }
 }

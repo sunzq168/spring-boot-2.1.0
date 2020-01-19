@@ -23,4 +23,7 @@ public interface UserService {
     List<User> findByLikeName(String name);
 
     List<User> findByIn(List<Integer> idList);
+
+    List<User> findByIdIn(List<Integer> idList);
+
 }

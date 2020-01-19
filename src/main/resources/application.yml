@@ -33,6 +33,22 @@ spring:
     port: 6379
     password:
 
+#  mail:
+#    host: smtp.qq.com
+#    username: 421793988@qq.com
+#    password: sun.1988.12.15.
+#    default-encoding: UTF-8
+
+  activemq:
+    user:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    pool:
+      enabled: false
+    packages:
+      trust-all: true
+
+
 
 
 

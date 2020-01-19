@@ -1,7 +1,9 @@
 package com.sun.zq;
 
+import com.sun.zq.activemq.MqProducer;
 import com.sun.zq.model.User;
 import com.sun.zq.service.UserService;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.jms.Destination;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,6 +33,9 @@ public class ApplicationTests {
 	private RedisTemplate redisTemplate;
     @Autowired
 	private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+	private MqProducer producer;
 
 
 	@Test
@@ -82,6 +88,12 @@ public class ApplicationTests {
 
 		val = stringRedisTemplate.opsForValue().get("name");
 		System.out.println(val);
+	}
+
+	@Test
+	public void testActiveMq() {
+		Destination destination = new ActiveMQQueue("testMq.queue");
+		producer.sendMessage(destination, "消息内容");
 	}
 
 
