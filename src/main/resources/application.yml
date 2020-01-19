@@ -36,5 +36,5 @@ spring:
 
 
 
-
-
+logging:
+  config: classpath:log4j.xml
