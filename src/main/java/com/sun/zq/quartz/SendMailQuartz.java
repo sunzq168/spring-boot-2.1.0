@@ -1,6 +1,5 @@
 package com.sun.zq.quartz;
 
-import com.sun.zq.mail.SendMailService;
 import com.sun.zq.model.User;
 import com.sun.zq.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,7 @@ public class SendMailQuartz {
 
     @Scheduled(cron = "*/5 * * * * *")
     public void reportCurrentByCron() {
-        log.info("定时器运行了！");
+        //log.info("定时器运行了！");
         List<User> userList = userService.findAll();
 
         //sendMailService.sendMail(userList);

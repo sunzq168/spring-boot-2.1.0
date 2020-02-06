@@ -5,14 +5,31 @@
     <title>hello</title>
 </head>
 <body>
+用户数量：<span th:text="${#lists.size(users)}" />
 <table border="1">
     <tr>
+        <td>ID</td>
+        <td>登录名</td>
         <td>用户名</td>
+        <td>用户名长度</td>
         <td>年龄</td>
+        <td>年龄格式化</td>
+        <th>状态变量：index</th>
+        <th>状态变量：first</th>
+        <th>状态变量：last</th>
+
     </tr>
-    <tr th:each="user:${users}">
+    <tr th:each="user,userStat:${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.loginName}"></td>
         <td th:text="${user.name}"></td>
+        <td th:text="${#strings.length(user.name)}"></td>
         <td th:text="${user.age}"></td>
+        <td th:text="${#numbers.formatDecimal(user.age,3,2)}"></td>
+<!--        <td th:text="${#dates.format('2012-01-01 12:12:12','yyyy-MM-dd HH:mm:ss')}"></td>-->
+        <th th:text="${userStat.index}"></th>
+        <th th:text="${userStat.first}"></th>
+        <th th:text="${userStat.last}"></th>
     </tr>
 
 </table>

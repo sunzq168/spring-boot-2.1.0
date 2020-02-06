@@ -3,10 +3,12 @@ package com.sun.zq.service;
 import com.sun.zq.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     User findById(Integer id);
 
@@ -16,7 +18,9 @@ public interface UserService {
 
     void deleteById(Integer id) ;
 
-    Page<User> findAll(Pageable pageable);
+    Page<User> findAllByPage(Pageable pageable);
+
+    Iterable<User> findAllBySort(Sort sort);
 
     User findByName(String name);
 
@@ -25,5 +29,10 @@ public interface UserService {
     List<User> findByIn(List<Integer> idList);
 
     List<User> findByIdIn(List<Integer> idList);
+
+    List<User> findUserByName(String name);
+
+    User findByLoginName(String loginName);
+
 
 }

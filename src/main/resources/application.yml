@@ -1,7 +1,22 @@
+
+
 #激活开发环境配置
 spring:
   profiles:
     active: dev
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+# 解决表中驼峰命名会被自动转成数据库下划线命名，指定@Column的name也不起作用
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
 
 
 

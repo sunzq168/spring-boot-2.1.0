@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = Application.class)
 public class ApplicationTests {
 
     @Autowired

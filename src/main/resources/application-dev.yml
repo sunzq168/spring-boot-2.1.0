@@ -1,5 +1,5 @@
-server:
-  port:8080
+
+
 spring:
   datasource:
     ### MySQL 连接信息
@@ -21,11 +21,17 @@ spring:
       test-on-return: false
       ###打开 PSCache，并且指定每个连接上 PSCache 的大小
       pool-prepared-statements: true
+
+  #thymeleaf 开始
   thymeleaf:
     mode: HTML5
     cache: false
     prefix: classpath:/templates/
     encoding: UTF-8
+    suffix: .html
+    servlet:
+      content-type: text/html
+  #thymeleaf 结束
 
   redis:
     database: 0
@@ -47,6 +53,11 @@ spring:
       enabled: false
     packages:
       trust-all: true
+  jpa:
+    database: mysql
+    #show-sql: true
+    #hibernate:
+      #ddl-auto: update
 
 
 logging:
